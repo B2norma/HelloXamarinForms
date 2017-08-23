@@ -12,14 +12,27 @@ namespace HelloXamarinForms
         public App()
         {
             // The root page of your application
+            var layout = new StackLayout
+            {
+                VerticalOptions = LayoutOptions.Center,
+                Children ={new Label{HorizontalTextAlignment = TextAlignment.Center, Text = "Welcome to Xamarin Forms!"}}
+            };
+
             MainPage = new ContentPage
             {
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = { new Label { HorizontalTextAlignment = TextAlignment.Center, Text = "Welcome to Xamarin.Forms!"}}
-                }
+                Content = layout
             };
+
+            Button button = new Button
+            {
+                Text = "Click Me"
+            };
+
+            button.Clicked += async (s, e) => {
+                await MainPage.DisplayAlert("Alert", "You clicked me", "OK");
+            };
+
+            layout.Children.Add(button);
         }
     }
 }
